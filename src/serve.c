@@ -42,8 +42,9 @@ static void usage(const char* msg)
 		" commands:\n"
 		"   start\n"
 		"   stop\n"
-		"   kill\n"
+		"   stat\n"
 		"   term\n"
+		"   kill\n"
 		"serve dir: %s\n"
 		, opt_prog, SERVE_DIR);
 
