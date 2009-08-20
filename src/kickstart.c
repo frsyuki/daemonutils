@@ -98,15 +98,16 @@ static pid_t fork_run(const char* name)
 		if(pid <  0) { exit(127); }
 		if(pid != 0) { exit(0); }
 
-		char* argv[8];
+		char* argv[9];
 		argv[0] = (char*)opt_supervise;  // FIXME dup
-		argv[1] = (char*)"-c";
-		argv[2] = (char*)SERVE_CTL_FILE;
-		argv[3] = (char*)"-s";
-		argv[4] = (char*)SERVE_STAT_FILE;
-		argv[5] = (char*)"--";
-		argv[6] = (char*)"./"SERVE_RUN_FILE;
-		argv[7] = (char*)NULL;
+		argv[1] = (char*)"-x";
+		argv[2] = (char*)"-c";
+		argv[3] = (char*)SERVE_CTL_FILE;
+		argv[4] = (char*)"-s";
+		argv[5] = (char*)SERVE_STAT_FILE;
+		argv[6] = (char*)"--";
+		argv[7] = (char*)"./"SERVE_RUN_FILE;
+		argv[8] = (char*)NULL;
 		execv(argv[0], argv);
 		perror("execv");
 		exit(127);
