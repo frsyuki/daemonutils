@@ -1,0 +1,20 @@
+AC_INIT(src/serve.c)
+AC_CONFIG_AUX_DIR(ac)
+AM_INIT_AUTOMAKE(serve, 0.0.1)
+AC_CONFIG_HEADER(config.h)
+
+
+CFLAGS="-g -Wall $CFLAGS"
+AC_SUBST(CFLAGS)
+
+AC_PROG_CC
+
+AC_PROG_LIBTOOL
+AM_PROG_AS
+AM_PROG_CC_C_O
+
+
+AC_OUTPUT([
+		   src/Makefile
+		   Makefile])
+
