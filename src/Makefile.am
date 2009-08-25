@@ -13,3 +13,7 @@ serve_supervise_SOURCES = supervise.c sig.c
 
 serve_kickstart_SOURCES = kickstart.c sig.c
 
+noinst_HEADERS = \
+		serve.h \
+		sig.h
+
