@@ -41,6 +41,10 @@ Use serve command to get status of or control services:
     $ serve kumo-manager stop
     $ serve kumo-manager start
 
+Use serve-list command to get status of all serveces.
+
+   $ serve-list /usr/local/etc/serve
+
 
 ## License
 
