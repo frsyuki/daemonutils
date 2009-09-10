@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+dir="/etc/serve"
+serve="serve"
+
+if [ -n "$1" ];then
+	dir="$1"
+fi
+
+if [ ! -d $dir ];then
+	echo "usage: $0 [path=/etc/serve]"
+	echo "error: no such file or directory: $dir"
+	exit 1
+fi
+
+for f in $dir/*.run; do
+	f=${f#$dir/}
+	f=${f%.run}
+	out=$($serve $f stat > /dev/null 2>&1)
+	stat=$?
+	if [ $stat -eq 0 ];then
+		echo "$f: $out"
+	elif [ $stat -eq 1 ];then
+		echo "$f: not supervised. run \`serve-kickstart $dir/$f.run\`"
+	elif [ $stat -eq 127 -a -z "$out" ];then
+		echo "$f: unknown error: $serve: command not found"
+	else
+		echo "$f: unknown error: $out"
+	fi
+done
+

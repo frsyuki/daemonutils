@@ -7,6 +7,8 @@ AM_CFLAGS = \
 		-DSERVE_SUPERVISE="\"@bindir@/serve-supervise\"" \
 		-DSERVE_DIR="\"@sysconfdir@/serve\""
 
+bin_SCRIPTS = serve-list
+
 serve_SOURCES = serve.c
 
 serve_supervise_SOURCES = supervise.c sig.c
