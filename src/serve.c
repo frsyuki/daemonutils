@@ -46,7 +46,7 @@ static void usage(const char* msg)
 		"   term\n"
 		"   kill\n"
 		"serve dir: %s\n"
-		, opt_prog, SERVE_DIR);
+		, opt_prog, opt_serve_dir);
 
 	if(msg) { printf("error: %s\n", msg); }
 
@@ -151,10 +151,11 @@ int main(int argc, char** argv)
 
 	if(argc <= 2) { usage(NULL); }
 
-	name = argv[1];
-	cmd  = argv[2];
-	argv = argv+3;
-	argc = argc-3;
+	argc -= optind;
+	argv += optind;
+
+	name = argv[0];
+	cmd  = argv[1];
 
 #define SUBCMD(CMD) \
 		if(strcmp(cmd, #CMD) == 0) { \
@@ -171,5 +172,6 @@ int main(int argc, char** argv)
 	//SUBCMD(cont);
 
 	usage("unknown command");
+	return 0;
 }
 
