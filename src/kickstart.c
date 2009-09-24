@@ -260,10 +260,14 @@ static void usage(const char* prog, const char* msg)
 int main(int argc, char** argv)
 {
 	int c;
-	while((c = getopt(argc, argv, "s")) != -1) {
+	while((c = getopt(argc, argv, "sc:")) != -1) {
 		switch(c) {
 		case 's':
 			opt_scan = 1;
+			break;
+
+		case 'c':
+			opt_supervise = optarg;
 			break;
 
 		default:
