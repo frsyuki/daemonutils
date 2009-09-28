@@ -19,3 +19,5 @@ noinst_HEADERS = \
 		serve.h \
 		sig.h
 
+EXTRA_DIST = $(bin_SCRIPTS)
+
