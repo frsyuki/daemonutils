@@ -88,9 +88,14 @@ static pid_t fork_run(const char* name)
 		return -1;
 
 	} else if(pid == 0) {
+		close(0);
+		close(1);
+		close(2);
 		dup2(g_rnull, 0);
 		dup2(g_wnull, 1);
 		dup2(g_wnull, 2);
+		close(g_rnull);
+		close(g_wnull);
 
 		sig_uncatch(SIGCHLD);
 		setsid();

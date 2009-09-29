@@ -357,9 +357,14 @@ static int daemonize(void)
 	}
 	if(pid > 0) { exit(0); }
 
+	close(0);
+	close(1);
+	close(2);
 	dup2(rnull, 0);
 	dup2(wnull, 1);
 	dup2(wnull, 2);
+	close(rnull);
+	close(wnull);
 
 	setsid();
 	pid = fork();
