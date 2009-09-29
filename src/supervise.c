@@ -133,6 +133,8 @@ int supervise_init(void)
 
 		g_ctl_rfd = pair[0];
 		g_ctl_wfd = pair[1];
+		ret = fcntl(g_ctl_rfd, F_SETFD, FD_CLOEXEC);
+		ret = fcntl(g_ctl_wfd, F_SETFD, FD_CLOEXEC);
 
 		return 0;
 	}
