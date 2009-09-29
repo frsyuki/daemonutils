@@ -149,10 +149,10 @@ int main(int argc, char** argv)
 		}
 	}
 
-	if(argc <= 2) { usage(NULL); }
-
 	argc -= optind;
 	argv += optind;
+
+	if(argc != 2) { usage(NULL); }
 
 	name = argv[0];
 	cmd  = argv[1];
