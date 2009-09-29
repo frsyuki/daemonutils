@@ -148,14 +148,14 @@ int supervise_init(void)
 		fprintf(stderr, "can't open %s fifo for read: %s\n", opt_ctl_path, strerror(errno));
 		goto err_open_rfd;
 	}
-	ret = fcntl(g_ctl_rfd, F_SETFL, FD_CLOEXEC);
+	ret = fcntl(g_ctl_rfd, F_SETFD, FD_CLOEXEC);
 
 	g_ctl_wfd = open(opt_ctl_path, O_WRONLY | O_NDELAY);
 	if(g_ctl_wfd < 0) {
 		fprintf(stderr, "can't open %s fifo for write: %s\n", opt_ctl_path, strerror(errno));
 		goto err_open_wfd;
 	}
-	ret = fcntl(g_ctl_wfd, F_SETFL, FD_CLOEXEC);
+	ret = fcntl(g_ctl_wfd, F_SETFD, FD_CLOEXEC);
 
 	return 0;
 
