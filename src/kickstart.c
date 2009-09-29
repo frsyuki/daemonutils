@@ -52,7 +52,7 @@ static void sigchild_handler(int signum)
 
 static int check_control(const char* path)
 {
-	int check = open(SERVE_CTL_FILE, O_WRONLY | O_NDELAY);
+	int check = open(path, O_WRONLY | O_NDELAY);
 	if(check >= 0) {
 		fcntl(check, F_SETFL, O_NONBLOCK);
 		if(write(check, " ", 1) > 0) {
