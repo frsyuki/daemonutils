@@ -78,7 +78,7 @@ static pid_t fork_run(const char* name)
 	pid_t pid;
 
 	if(check_control(SERVE_CTL_FILE)) {
-		fprintf(stderr, "%s is already running.\n", name);
+		fprintf(stderr, "supervisor of %s is already running.\n", name);
 		return -1;
 	}
 
