@@ -16,7 +16,7 @@ fi
 for f in $dir/*.run; do
 	f=${f#$dir/}
 	f=${f%.run}
-	out=$($serve $f stat 2>&1)
+	out=$($serve -s "$dir" $f stat 2>&1)
 	stat=$?
 	if [ $stat -eq 0 ];then
 		echo "$f: $out"

@@ -133,18 +133,21 @@ static int run_name(const char* name)
 
 		*pos = '\0';
 
+		char symfile[1024];
+		strcpy(symfile, name);
+		strcat(symfile, "/" SERVE_RUN_FILE);
+
+		if(is_executable(symfile)) {
+			return -1;
+		}
+
+		char linkto[1024];
+		strcpy(linkto, "../");
+		strcat(linkto, name);
+		strcat(linkto, ".run");
+
 		mkdir(name, 0755);
-
-		char tbuf[1024];
-		strcpy(tbuf, "../");
-		strcat(tbuf, name);
-		strcat(tbuf, ".run");
-
-		char fbuf[1024];
-		strcpy(fbuf, name);
-		strcat(fbuf, "/" SERVE_RUN_FILE);
-
-		symlink(tbuf, fbuf);
+		symlink(linkto, symfile);
 	}
 
 	ret = chdir(name);
@@ -212,6 +215,8 @@ int kickstart_scan(char* path)
 
 	while(1) {
 		struct dirent* d;
+		char* check_strpos;
+
 		d = readdir(dir);
 		if(!d) { break; }
 

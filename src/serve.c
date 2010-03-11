@@ -38,15 +38,15 @@ const char* opt_serve_dir = SERVE_DIR;
 static void usage(const char* msg)
 {
 	printf(
-		"Usage: %s <name> <command>\n"
+		"Usage: %s [-s serve dir] <name> <command>\n"
 		" commands:\n"
 		"   start\n"
 		"   stop\n"
 		"   stat\n"
 		"   term\n"
 		"   kill\n"
-		"serve dir: %s\n"
-		, opt_prog, opt_serve_dir);
+		"default serve dir: %s\n"
+		, opt_prog, SERVE_DIR);
 
 	if(msg) { printf("error: %s\n", msg); }
 
