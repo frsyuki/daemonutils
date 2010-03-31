@@ -101,14 +101,14 @@ static int cmd_stop(char* name)
 static int cmd_kill(char* name)
 {
 	int ctl = open_ctl(name);
-	write(ctl, "d", 1);
+	write(ctl, "k", 1);
 	return 0;
 }
 
 static int cmd_term(char* name)
 {
 	int ctl = open_ctl(name);
-	write(ctl, "d", 1);
+	write(ctl, "t", 1);
 	return 0;
 }
 
