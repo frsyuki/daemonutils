@@ -64,6 +64,7 @@ static int open_ctl(const char* name)
 	int ret = open(pathbuf, O_WRONLY | O_NDELAY);
 	if(ret < 0) {
 		fprintf(stderr, "can't open %s: %s\n", pathbuf, strerror(errno));
+		exit(1);
 	}
 	return ret;
 }
@@ -87,6 +88,7 @@ static int open_stat(const char* name)
 static int cmd_start(char* name)
 {
 	int ctl = open_ctl(name);
+	if(ctl < 0) return -1;
 	write(ctl, "u", 1);
 	return 0;
 }
@@ -94,6 +96,7 @@ static int cmd_start(char* name)
 static int cmd_stop(char* name)
 {
 	int ctl = open_ctl(name);
+	if(ctl < 0) return -1;
 	write(ctl, "d", 1);
 	return 0;
 }
@@ -101,6 +104,7 @@ static int cmd_stop(char* name)
 static int cmd_kill(char* name)
 {
 	int ctl = open_ctl(name);
+	if(ctl < 0) return -1;
 	write(ctl, "k", 1);
 	return 0;
 }
@@ -108,6 +112,7 @@ static int cmd_kill(char* name)
 static int cmd_term(char* name)
 {
 	int ctl = open_ctl(name);
+	if(ctl < 0) return -1;
 	write(ctl, "t", 1);
 	return 0;
 }
