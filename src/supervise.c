@@ -122,6 +122,16 @@ fprintf(stderr, "start\n"); // FIXME path
 	stat_update();
 }
 
+void down(void)
+{
+	g_flagwant = 1;
+	g_flagwantup = 0;
+	if(g_pid) {
+		g_flagpaused = 0;
+	}
+	stat_update();
+}
+
 int supervise_init(void)
 {
 	int ret;
@@ -233,14 +243,11 @@ printf("reading... pid=%d\n",g_pid);
 		switch(c) {
 		case 'd':  /* down */
 printf("down %d\n",g_pid);
-			g_flagwant = 1;
-			g_flagwantup = 0;
 			if(g_pid) {
 				kill(g_pid, SIGTERM);
 				kill(g_pid, SIGCONT);
-				g_flagpaused = 0;
 			}
-			stat_update();
+			down();
 			break;
 
 		case 'u':  /* up */
@@ -295,12 +302,18 @@ printf("interrupt %d\n",g_pid);
 
 		case 't':  /* term */
 printf("term %d\n",g_pid);
-			if(g_pid) { kill(g_pid, SIGTERM); }
+			if(g_pid) {
+				kill(g_pid, SIGTERM);
+			}
+			down();
 			break;
 
 		case 'k':  /* kill */
 printf("kill %d\n",g_pid);
-			if(g_pid) { kill(g_pid, SIGKILL); }
+			if(g_pid) {
+				kill(g_pid, SIGKILL);
+			}
+			down();
 			break;
 
 		case '1':  /* usr1 */
